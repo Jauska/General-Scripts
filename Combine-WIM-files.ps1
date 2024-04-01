@@ -20,7 +20,7 @@ ForEach ($WimFile in $Wims) {
     }
     $endresult += $ExpandedWIMinfo
 }
-#$endresult | Out-HtmlView
+
 Write-Progress -Activity "Wim files read. Starting combine process."
 $imagecount = $endresult.Count
 $index = 0
@@ -30,3 +30,4 @@ foreach ($InstallImage in $endresult) {
     Start-Sleep -Milliseconds 2000
     Export-WindowsImage -SourceImagePath $InstallImage.WimFilePath -SourceIndex $InstallImage.ImageIndex -DestinationImagePath $ResultFilePath -DestinationName $InstallImage.ImageName
 }
+[console]::beep(2000,500)
