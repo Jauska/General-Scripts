@@ -27,7 +27,6 @@ $index = 0
 foreach ($InstallImage in $endresult) {
     $index = $index + 1
     Write-Progress -PercentComplete ($index/$imagecount) -Activity "Working on image $index of $imagecount"
-    Start-Sleep -Milliseconds 2000
     Export-WindowsImage -SourceImagePath $InstallImage.WimFilePath -SourceIndex $InstallImage.WimIndex -DestinationImagePath $ResultFilePath -DestinationName $InstallImage.ImageName
 }
 [console]::beep(2000,500)
