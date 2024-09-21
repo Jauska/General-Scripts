@@ -283,3 +283,6 @@ Windows Registry Editor Version 5.00
 "DisableBlockAtFirstSeen"=dword:00000001
 "SpynetReporting"=dword:00000000
 "SubmitSamplesConsent"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer]
+"SettingsPageVisibility"="hide:Home"
