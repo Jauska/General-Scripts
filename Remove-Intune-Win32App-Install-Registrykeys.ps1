@@ -1,4 +1,17 @@
-﻿If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]"Administrator"))
+﻿#	.NOTES
+#	===========================================================================
+#	 Created on:   	12/01/2025 01.49
+#	 Modified on:	25/01/2025 01.55
+#	 Filename:     	Remove Intune Win32App Install Registrykeys
+#	 Version:		0.3.5
+#	===========================================================================
+#	.DESCRIPTION
+#		A script to run manually on workstaion that has had a failed deployment of win32 app after cleaning Intune cache.
+#		Note that this script does nothing for the detection method that might or might not be in place already.
+
+#Requires -Version 5.1
+
+If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]"Administrator"))
 {Start-Process PowerShell.exe -ArgumentList ("-NoProfile -ExecutionPolicy Bypass -File `"{0}`"" -f $PSCommandPath) -Verb RunAs
 Exit}
 
