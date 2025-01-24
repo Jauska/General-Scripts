@@ -2,8 +2,9 @@
 	.NOTES
 	===========================================================================
 	 Created on:   	12/01/2025 01.49
+	 Modified on:	25/01/2025 01.35
 	 Filename:     	Remove Intune Win32App Install Registrykeys
-	 Version:		0.3
+	 Version:		0.3.1
 	===========================================================================
 	.DESCRIPTION
 		A script to run manually on workstaion that has had a failed deployment of win32 app after cleaning Intune cache.
