@@ -3,7 +3,7 @@
 	===========================================================================
 	 Created on:   	12/01/2025 01.49
 	 Filename:     	Remove Intune Win32App Install Registrykeys
-	 Version:		0.2
+	 Version:		0.3
 	===========================================================================
 	.DESCRIPTION
 		A script to run manually on workstaion that has had a failed deployment of win32 app after cleaning Intune cache.
@@ -16,6 +16,8 @@ If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
 Exit}
 
 
+function Remove-Intune-Win32App-Install-Registrykeys {
+
 $AppID = $null
 $OperationalReg = $null
 $InstalledReg = $null
@@ -24,7 +26,18 @@ $GRSHash = $null
 
 $Win32AppsRegPath = "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\IntuneManagementExtension\Win32Apps"
 
-$AppID = Read-Host -Prompt "Enter the Intune application ID of the app you want to clear from registy: "
+$Question1Answer = Read-Host -Prompt "Read Intune AppId from Clipboard? Y/N"
+If ($Question1Answer -eq "Y") {
+	$AppIDCandinate = Get-Clipboard
+	$Question2Answer = Read-Host "Read value $AppIDCandinate. Is that Correct? Y/N"
+	if ($Question2Answer -eq "Y") {
+		$AppID = $AppIDCandinate
+	}
+}else{
+	Write-Host "Okay. Then input it below."
+	$AppID = Read-Host -Prompt "Enter the Intune application ID of the app you want to clear from registy: "
+}
+
 
 function DeleteReg ($List)
 {
@@ -107,3 +120,6 @@ finally
 		Restart-Service -Name IntuneManagementExtension -Force -Confirm:$false
 	}
 }
+}
+
+Remove-Intune-Win32App-Install-Registrykeys
