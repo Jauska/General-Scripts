@@ -32,8 +32,11 @@ If ($Question1Answer -eq "Y") {
 	$Question2Answer = Read-Host "Read value $AppIDCandinate. Is that Correct? Y/N"
 	if ($Question2Answer -eq "Y") {
 		$AppID = $AppIDCandinate
-	}
-}else{
+	}else{
+	Write-Host "Okay. Then input it below."
+	$AppID = Read-Host -Prompt "Enter the Intune application ID of the app you want to clear from registy: "
+}
+}else {
 	Write-Host "Okay. Then input it below."
 	$AppID = Read-Host -Prompt "Enter the Intune application ID of the app you want to clear from registy: "
 }
