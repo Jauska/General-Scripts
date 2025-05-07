@@ -1,20 +1,24 @@
 ﻿#	.NOTES
 #	===========================================================================
 #	 Created on:   	12/01/2025 01.49
-#	 Modified on:	25/01/2025 02.01
+#	 Modified on:	07/05/2025 20:58
 #	 Filename:     	Remove Intune Win32App Install Registrykeys
-#	 Version:		0.3.6
+#	 Version:		0.4.0
 #	===========================================================================
 #	.DESCRIPTION
-#		A script to run manually on workstaion that has had a failed deployment of win32 app after cleaning Intune cache.
-#		Note that this script does nothing for the detection method that might or might not be in place already.
-
+#		A script to run manually on workstation that has had a failed deployment of win32 app after cleaning Intune cache.
+#		Note that this script does nothing for the possible detection method that might or might not be in place already.
 #Requires -Version 5.1
-Clear-Host
+
+param (
+	[Parameter(Mandatory=$false)]
+	[string]$Id = $null
+)
+
+#Clear-Host
 If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]"Administrator"))
 {Start-Process PowerShell.exe -ArgumentList ("-NoProfile -ExecutionPolicy Bypass -File `"{0}`"" -f $PSCommandPath) -Verb RunAs
 Exit}
-
 
 function Remove-Intune-Win32App-Install-Registrykeys {
 
@@ -26,6 +30,10 @@ $GRSHash = $null
 
 $Win32AppsRegPath = "Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\IntuneManagementExtension\Win32Apps"
 
+if ($Id.Length -gt 15) {
+	$AppID = $Id
+}else{
+
 $Question1Answer = Read-Host -Prompt "Read Intune AppId from Clipboard? Y/N"
 If ($Question1Answer -eq "Y") {
 	$AppIDCandinate = Get-Clipboard
@@ -34,18 +42,23 @@ If ($Question1Answer -eq "Y") {
 		$AppID = $AppIDCandinate
 	}else{
 	Write-Host "Okay. Then input it below."
-	$AppID = Read-Host -Prompt "Enter the Intune application ID of the app you want to clear from registy: "
+	$AppID = Read-Host -Prompt "Enter the Intune application ID of the app you want to clear from registy"
 }
 }else {
 	Write-Host "Okay. Then input it below."
-	$AppID = Read-Host -Prompt "Enter the Intune application ID of the app you want to clear from registy: "
+	$AppID = Read-Host -Prompt "Enter the Intune application ID of the app you want to clear from registy"
+}
 }
 
+If ($AppID.Length -lt 15) {
+	Write-Error "No Appid given!"
+}else{
 
 function DeleteReg ($List)
 {
 	foreach ($Item in $List)
 	{
+		Write-Host  "Removing registry path $($item.PsPath)"
 		Remove-Item -Force -Recurse -Path $Item.PsPath -Confirm:$false
 	}
 }
@@ -54,6 +67,7 @@ function DeleteRegistryProperty ($PropertyList, $AppID)
 {
 	foreach ($Property in $PropertyList)
 	{
+		Write-Host  "Removing registry path $($Property.PsPath)"
 		Remove-ItemProperty -Path $Property.PSPath -Name $AppID -Force -Confirm:$false
 	}
 }
@@ -122,6 +136,7 @@ finally
 		Write-Host -Object "Restarting Intune Management Service"
 		Restart-Service -Name IntuneManagementExtension -Force -Confirm:$false
 	}
+}
 }
 }
 
