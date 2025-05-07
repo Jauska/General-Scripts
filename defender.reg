@@ -1,0 +1,17 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender]
+"SpynetReporting"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Policy Manager]
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection]
+"DisableBehaviorMonitoring"=dword:00000001
+"DisableOnAccessProtection"=dword:00000001
+"DisableScanOnRealtimeEnable"=dword:00000001
+"DisableRealtimeMonitoring"=dword:00000001
+
+[HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\SpyNet]
+"DisableBlockAtFirstSeen"=dword:00000001
+"SpynetReporting"=dword:00000000
+"SubmitSamplesConsent"=dword:00000000
