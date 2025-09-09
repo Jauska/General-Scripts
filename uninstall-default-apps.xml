@@ -1,5 +1,6 @@
-<enabled/><data id="WindowsFeedbackHub" value="false"/>​​​​​​​
-​​​​​​​<data id="MicrosoftOfficeHub" value="true"/>
+<enabled/>
+<data id="WindowsFeedbackHub" value="false"/>
+<data id="MicrosoftOfficeHub" value="true"/>
 <data id="Clipchamp" value="true"/>
 <data id="Copilot" value="true"/>
 <data id="BingNews" value="true"/>
