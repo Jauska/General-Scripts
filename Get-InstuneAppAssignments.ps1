@@ -28,5 +28,5 @@ $AssignmentsResult = $assignedapps | ForEach-Object {
 }
 Write-Progress -PercentComplete 100 -Completed -Activity "Completed. Opening results to default browser."
 $AssignmentsResult | Out-HtmlView
-Write-Progress -PercentComplete 100 -Completed -Activity "Results opened to default browser."
+Write-Host "Results opened to default browser."
 
