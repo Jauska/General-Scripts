@@ -1,4 +1,4 @@
-#Requires -Modules Microsoft.Graph.Authentication; Microsoft.Graph.Identity.SignIns -PSEdition Desktop -Version 5.1
+#Requires -Modules Microsoft.Graph.Authentication; Microsoft.Graph.Identity.SignIns -PSEdition Desktop -Version 7.4
 
 $TenantId = ""
 $ClientId = ""
